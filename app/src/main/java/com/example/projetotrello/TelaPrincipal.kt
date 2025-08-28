@@ -66,8 +66,7 @@ fun TelaInicial() {
             innerPadding ->
         val context = LocalContext.current
 
-        /*Variavel com nome dos quadros*/
-        var listaDeQuadros = listOf("Faculdade", "Trabalho")
+        var listaDeQuadros = listOf("Faculdade", "Trabalho", "Inglês", "Vida Pessoal")
 
         Surface(
             color = Color(28, 28, 28),
@@ -89,7 +88,6 @@ fun TelaInicial() {
     }
 }
 
-/*Função para criar os quadros*/
 @Composable
 fun CriarQuadro() {
 
@@ -131,7 +129,6 @@ fun CriarQuadro() {
     }
 }
 
-/*Cards com a lista de quadros do usuário*/
 @Composable
 fun ListaQuadros(quadros: String){
     Card(

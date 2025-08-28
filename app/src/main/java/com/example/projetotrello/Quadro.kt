@@ -51,7 +51,6 @@ class Quadro : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-
             ProjetoTrelloTheme {
                 Tela1()
             }
@@ -59,107 +58,101 @@ class Quadro : ComponentActivity() {
     }
 }
 
+
 @Preview
 @Composable
 fun Tela1() {
-    Column {
-        TelaQuadro1()
-        Spacer(modifier = Modifier.height(20.dp))
 
-    }
-}
+    val titulosDosCards = listOf(
+        "Telas",
+        "Programar telas",
+        "Testar o App",
+        "Entregar"
+    )
+    val datasDosCards = listOf(
+        "28/08/2025",
+        "30/08/2025",
+        "05/09/2025",
+        "10/09/2025"
+    )
 
+    Surface(
+        color = Color(28, 28, 28),
+        modifier = Modifier.fillMaxSize()
+    ) {
 
-//@Preview(showBackground = true)
-@Composable
-fun TelaQuadro1() {
-    Scaffold { innerPadding ->
-        Surface(
-            color = Color.White,
+        Card(
+            colors = CardDefaults.cardColors(containerColor = Color(54, 54, 54)),
             modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
+                .fillMaxWidth()
+                .wrapContentHeight()
         ) {
             Column(
                 modifier = Modifier
-                    .fillMaxSize()
+                    .fillMaxWidth()
                     .padding(10.dp)
             ) {
-                Card(
-                    colors = CardDefaults.cardColors(containerColor = Color(28, 28, 28)),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                ) {
-                    Column(
+
+                Text(
+                    text = "Desenvolvimento Mobile",
+                    style = MaterialTheme.typography.headlineSmall,
+                    color = Color.White,
+                    modifier = Modifier.padding(bottom = 10.dp)
+                )
+
+
+                titulosDosCards.forEachIndexed { index, titulo ->
+
+                    val data = datasDosCards[index]
+
+                    Card(
+                        colors = CardDefaults.cardColors(containerColor = Color(0, 127, 129)),
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(10.dp)
+                            .padding(bottom = 8.dp)
                     ) {
-
-                        Text(
-                            text = "Desenvolvimento Mobile",
-                            style = MaterialTheme.typography.headlineSmall,
-                            color = Color.White,
-                            modifier = Modifier.padding(bottom = 10.dp)
-                        )
-
-                        Card(
-                            colors = CardDefaults.cardColors(containerColor = Color(0, 127, 129)),
+                        Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(130.dp)
+                                .padding(10.dp),
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
-                            
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(10.dp),
-                            ){
+                            Icon(
+                                imageVector = Icons.Default.Edit,
+                                contentDescription = "Editar",
+                                tint = Color.White,
+                                modifier = Modifier.size(24.dp)
+                            )
 
-                                Icon(
-                                    imageVector = Icons.Default.Edit,
-                                    contentDescription = "",
-                                    tint = Color.White,
-                                    modifier = Modifier.size(24.dp)
+                            Spacer(modifier = Modifier.width(8.dp))
+
+                            Column {
+                                Text(
+                                    text = titulo, // <- Usa a variável do loop
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    color = Color.White
                                 )
-
-                                Column {
-
-                                    Text(
-                                        "Trabalho A2",
-                                        style = MaterialTheme.typography.bodyLarge,
-                                        color = Color.White,
-                                        modifier = Modifier.padding(horizontal = 8.dp)
+                                Spacer(modifier = Modifier.height(5.dp))
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Icon(
+                                        imageVector = Icons.Default.DateRange,
+                                        contentDescription = "Data",
+                                        modifier = Modifier.size(20.dp),
+                                        tint = Color.White
                                     )
-
-                                    Row(
-                                        modifier = Modifier.padding(vertical = 5.dp)
-                                    ){
-
-                                        Icon(
-                                            imageVector = Icons.Default.DateRange,
-                                            contentDescription = "",
-                                            modifier = Modifier
-                                                .size(20.dp)
-                                            ,
-                                            tint = Color.White
-                                        )
-                                        Text(
-                                            "28/08/2025",
-                                            style = MaterialTheme.typography.bodyMedium,
-                                            color = Color.White,
-                                            modifier = Modifier.padding(horizontal = 10.dp)
-                                        )
-                                    }
+                                    Spacer(modifier = Modifier.width(10.dp))
+                                    Text(
+                                        text = data, // <- Usa a variável do loop
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = Color.White
+                                    )
                                 }
-
-
                             }
                         }
                     }
-
-                    AddCard()
                 }
+
+                AddCard()
             }
         }
     }
